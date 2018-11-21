@@ -81,7 +81,7 @@ further information and documentation:
 * See the Github version of this document
   [here...](https://github.com/liaScript/pannellum_template)
 * See the LiaScript version of this document
-  [here...](https://liascript.github.io/?https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md)
+  [here...](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md)
 
 ## Images
 
