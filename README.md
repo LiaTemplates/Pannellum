@@ -17,7 +17,7 @@ script:   https://cdn.pannellum.org/2.4/pannellum.js
           https://pannellum.org/js/videojs-pannellum-plugin.js
 
 @panorama
-<div id="panorama_@0" style="width: 100%; height: 400px;"></div>
+<div id="panorama_@0" style="width: 100%; height: 400px;" class="persistent"></div>
 
 <script>
   pannellum.viewer('panorama_@0', {
@@ -31,7 +31,7 @@ script:   https://cdn.pannellum.org/2.4/pannellum.js
 
 
 @panorama.hotspots
-<div id="panorama_@0" style="width: 100%; height: 400px;"></div>
+<div id="panorama_@0" style="width: 100%; height: 400px;" class="persistent"></div>
 
 <script>
   pannellum.viewer('panorama_@0', {
@@ -46,7 +46,7 @@ script:   https://cdn.pannellum.org/2.4/pannellum.js
 
 
 @panorama.video
-<video id="@0" class="video-js vjs-default-skin vjs-big-play-centered"
+<video id="@0" class="video-js vjs-default-skin vjs-big-play-centered persistent"
   controls preload="none" style="width:100%;height:400px;"
   crossorigin="anonymous">
   <source src="@1" type="video/mp4" />
@@ -103,8 +103,7 @@ your macro in backtics so that the settings are nicely rendered on github. All
 the code below the macro is simply passed as a third multiline parameter to the
 macro above.
 
-```json
-@panorama(json_example,https://pannellum.org/images/bma-1.jpg)
+```json @panorama(json_example,https://pannellum.org/images/bma-1.jpg)
 
 {
     "pitch": 14.1,
