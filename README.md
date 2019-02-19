@@ -16,37 +16,28 @@ script:   https://cdn.pannellum.org/2.4/pannellum.js
           https://vjs.zencdn.net/7.1.0/video.js
           https://pannellum.org/js/videojs-pannellum-plugin.js
 
-@panorama
-<div id="panorama_@0" style="width: 100%; height: 400px;" class="persistent"></div>
+@Pannellum.panorama: @Pannellum._panorama_(@uid,@0,{})
+@Pannellum.panoramaWithHotspots: @Pannellum._panorama_(@uid,@0,```@1```)
+@Pannellum.hotspots: @Pannellum._panorama_(@uid,@0, ,true)
+@Pannellum._panorama_
+<div id="panorama_@0" style="width: 100%; height: 400px;"></div>
 
 <script>
-  pannellum.viewer('panorama_@0', {
-        "type": "equirectangular",
-        "panorama": "@1",
-        "autoLoad": true,
-        "hotSpots": [@2]
-  });
+  setTimeout(function(e) {
+    let debug = "@3";
+    pannellum.viewer('panorama_@0', {
+          "type": "equirectangular",
+          "hotSpotDebug": (debug == "true" ? true : false),
+          "panorama": "@1",
+          "autoLoad": true,
+          "hotSpots": [@2]
+    });
+  }, 1000);
 </script>
 @end
 
-
-@panorama.hotspots
-<div id="panorama_@0" style="width: 100%; height: 400px;" class="persistent"></div>
-
-<script>
-  pannellum.viewer('panorama_@0', {
-        "type": "equirectangular",
-        "panorama": "@1",
-        "hotSpotDebug": true,
-        "autoLoad": true,
-        "hotSpots": []
-  });
-</script>
-@end
-
-
-@panorama.video
-<video id="@0" class="video-js vjs-default-skin vjs-big-play-centered persistent"
+@Pannellum.video
+<video id="@0" class="video-js vjs-default-skin vjs-big-play-centered"
   controls preload="none" style="width:100%;height:400px;"
   crossorigin="anonymous">
   <source src="@1" type="video/mp4" />
@@ -58,53 +49,67 @@ script:   https://cdn.pannellum.org/2.4/pannellum.js
 </video>
 
 <script>
-videojs('@0', {
-    plugins: {
-        pannellum: {}
-    }
-});
+setTimeout(function(e) {
+  videojs('@0', {
+      plugins: {
+          pannellum: {}
+      }
+  })}, 1000);
 </script>
 
 @end
-
-
 -->
 
 # pannellum_template
 
+                         --{{0}}--
 A template for including pannellum 360 degree panorama images into
 [LiaScript](https://liascript.github.io) courses. See the following links for
 further information and documentation:
 
-
+                          {{0-1}}
 * See the pannellum docs [here...](https://pannellum.org)
 * See the Github version of this document
   [here...](https://github.com/liaScript/pannellum_template)
 * See the LiaScript version of this document
   [here...](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md)
 
-## Images
 
-Use the following macro to autoload a panorama image. The first parameter is a
-simple id, that has to be used to distingush
+                         --{{1}}--
+There are three ways to use this template. The easiest way is to use the
+`import` statement and the url of the raw text-file of the master branch or any
+other branch or version. But you can also copy the required functionionality
+directly into the header of your Markdown document, see therefor the
+[last slide](#6). And of course, you could also clone this project and change
+it, as you wish.
 
-* param1: a simple id that has to be used to distingush between multiple
-  elements on one slide
-* param2: url of the image, relative images are also ok
-* param3: a set of hotspot parameters, see the following slide
+                           {{1}}
+1. Load the macros via
 
-@panorama(simple image,https://pannellum.org/images/cerro-toco-0.jpg,{})
+   `import: https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md`
+
+2. Copy the definitions into your Project
+
+3. Clone this repository on GitHub
 
 
-### Images with hotSpots
+## `@Pannellum.panorama`
 
-The representation below, is just a Markdown user-friendly macro call. Just put
-your macro in backtics so that the settings are nicely rendered on github. All
-the code below the macro is simply passed as a third multiline parameter to the
-macro above.
+                         --{{0}}--
+Simply call the macro `@Pannellum.panorama` with the url of the 3D image as the
+only parameter (in parenthesis).
 
-```json @panorama(json_example,https://pannellum.org/images/bma-1.jpg)
+@Pannellum.panorama(https://pannellum.org/images/cerro-toco-0.jpg)
 
+## `@Pannellum.panoramaWithHotspots`
+
+                         --{{0}}--
+Use `@Pannellum.panoramaWithHotspots`, the url of the 3D image and a JSON list
+of hotspots. You can use the macro code-block notation for this, the content of
+the is then block is passed as the second parameter. You can use the macro on
+the next slide to identifier your points of interest.
+
+```json @Pannellum.panoramaWithHotspots(https://pannellum.org/images/bma-1.jpg)
 {
     "pitch": 14.1,
     "yaw": 1.5,
@@ -126,20 +131,89 @@ macro above.
 }
 ```
 
+## `@Pannellum.hotspots`
 
-### Identifying hotSpots
+                         --{{0}}--
+If you use `@Pannellum.hotspots` (and pass it url of the 3D image as the only
+parameter) and open the developer-console you can click around on your image and
+the see the positions as console log outputs.
 
-Use the following macro to print the coordinates of mouse clicks to the
-browser's developer console, which makes it much easier to figure out where to
-place hot spots.
+@Pannellum.hotspots(https://pannellum.org/images/bma-1.jpg)
 
-`@panorama.hotspots(hotSpots,https://pannellum.org/images/cerro-toco-0.jpg)`
+## `@Pannellum.video`
 
-@panorama.hotspots(hotSpots,https://pannellum.org/images/cerro-toco-0.jpg)
+                         --{{0}}--
+Integrating a video happens similarly, but you will have to pass a unique
+identifier and then the url of your video.
 
+@Pannellum.video(vidID,https://pannellum.org/images/video/jfk.mp4)
 
-## Videos
+## Implementation
 
-`@panorama.video(vidTest,https://pannellum.org/images/video/jfk.mp4)`
+                         --{{0}}--
+Except of `@Pannellum.video`, all other panorama view macros are parametrized
+calls of the macro `@Pannellum._panorama_`, which defines a target `div` and a
+script to be executed. The delay is currently required, to deal with the loading
+delay of the all CSS and JavaScript files. This will be fixed in the next
+version of LiaScript.
 
-@panorama.video(vidTest,https://pannellum.org/images/video/jfk.mp4)
+````html
+link:     https://pannellum.org/css/style.css
+          https://cdn.pannellum.org/2.4/pannellum.css
+          https://vjs.zencdn.net/7.1.0/video-js.css
+
+script:   https://cdn.pannellum.org/2.4/pannellum.js
+          https://vjs.zencdn.net/7.1.0/video.js
+          https://pannellum.org/js/videojs-pannellum-plugin.js
+
+@Pannellum.panorama: @Pannellum._panorama_(@uid,@0,{})
+@Pannellum.panoramaWithHotspots: @Pannellum._panorama_(@uid,@0,```@1```)
+@Pannellum.hotspots: @Pannellum._panorama_(@uid,@0, ,true)
+
+@Pannellum._panorama_
+<div id="panorama_@0" style="width: 100%; height: 400px;"></div>
+
+<script>
+  setTimeout(function(e) {
+    let debug = "@3";
+    pannellum.viewer('panorama_@0', {
+          "type": "equirectangular",
+          "hotSpotDebug": (debug == "true" ? true : false),
+          "panorama": "@1",
+          "autoLoad": true,
+          "hotSpots": [@2]
+    });
+  }, 1000);
+</script>
+@end
+
+@Pannellum.video
+<video id="@0" class="video-js vjs-default-skin vjs-big-play-centered"
+  controls preload="none" style="width:100%;height:400px;"
+  crossorigin="anonymous">
+  <source src="@1" type="video/mp4" />
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to
+        a web browser that <a href="http://videojs.com/html5-video-support/"
+        target="_blank">supports HTML5 video</a>
+    </p>
+</video>
+
+<script>
+setTimeout(function(e) {
+  videojs('@0', {
+      plugins: {
+          pannellum: {}
+      }
+  })}, 1000);
+</script>
+
+@end
+````
+
+                         --{{1}}--
+If you want to minimize loading effort in your LiaScript project, you can also
+copy this code and paste it into your main comment header, see the code in the
+raw file of this document.
+
+{{1}} https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md
