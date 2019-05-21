@@ -60,7 +60,7 @@ setTimeout(function(e) {
 @end
 -->
 
-# pannellum_template
+# Pannellum - Template
 
                          --{{0}}--
 A template for including pannellum 360 degree panorama images into
@@ -70,9 +70,9 @@ further information and documentation:
                           {{0-1}}
 * See the pannellum docs [here...](https://pannellum.org)
 * See the Github version of this document
-  [here...](https://github.com/liaScript/pannellum_template)
+  [here...](https://github.com/liaTemplates/pannellum)
 * See the LiaScript version of this document
-  [here...](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md)
+  [here...](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaTemplates/pannellum/master/README.md)
 
 
                          --{{1}}--
@@ -86,7 +86,7 @@ it, as you wish.
                            {{1}}
 1. Load the macros via
 
-   `import: https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md`
+   `import: https://raw.githubusercontent.com/liaTemplates/pannellum/master/README.md`
 
 2. Copy the definitions into your Project
 
@@ -216,4 +216,4 @@ If you want to minimize loading effort in your LiaScript project, you can also
 copy this code and paste it into your main comment header, see the code in the
 raw file of this document.
 
-{{1}} https://raw.githubusercontent.com/liaScript/pannellum_template/master/README.md
+{{1}} https://raw.githubusercontent.com/liaTemplates/pannellum/master/README.md
