@@ -1,9 +1,11 @@
 <!--
 author:   Andre Dietrich
 email:    andre.dietrich@ovgu.de
-version:  0.1.0
+version:  0.1.1
 language: en
 narrator: US English Female
+
+logo:     https://cdn.pixabay.com/photo/2010/12/14/11/44/forest-3147_960_720.jpg
 
 comment:  Template for integrating 360 degree panorama images with the help of
           pannellum.
